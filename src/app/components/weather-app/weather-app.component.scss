@@ -1,0 +1,297 @@
+@import "../../colors.scss";
+
+.shadow {
+  transition: 0.2s;
+  -webkit-box-shadow: 0px 0px 10px 2px $purple;
+  -moz-box-shadow: 0px 0px 10px 2px $purple;
+  box-shadow: 0px 0px 10px 2px $purple;
+
+  &:hover {
+    transition: 0.2s;
+    -webkit-box-shadow: 0px 0px 10px 5px $purple;
+    -moz-box-shadow: 0px 0px 10px 5px $purple;
+    box-shadow: 0px 0px 10px 5px $purple;
+  }
+}
+
+.container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: $primary;
+
+  @media (max-width: 1200px) {
+    height: 100%;
+  }
+}
+
+.weather-app {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 700px;
+  width: 50vw;
+  padding: 50px;
+  background: $primary;
+  box-shadow: 0px 0px 80px 10px $purple;
+  border-radius: 50px;
+  color: white;
+
+  .weather-app-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 10%;
+
+    input {
+      width: 100%;
+      background-color: $purple2;
+      padding: 10px;
+      border: 2px solid $purple;
+      border-radius: 25px;
+      color: white;
+
+      &:hover,
+      &:focus {
+        border: 2px solid $purple;
+        outline: none;
+      }
+    }
+    button {
+      /* Dodaj stylizację, np. tło, kolor czcionki, obramowanie itp. */
+      background-color: $secondary;
+      margin-left: 10px;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 25px;
+
+      &:hover {
+        background-color: $purple;
+      }
+    }
+    @media (max-width: 700px) {
+      flex-direction: column;
+
+      button{
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .weather-app-container {
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    .weather-app-left,
+    .weather-app-right {
+      width: 50%;
+      height: 100%;
+
+      @media (max-width: 1200px) {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+    }
+  }
+
+  .weather-app-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .weather-icon {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      box-sizing: border-box;
+
+      width: 100%;
+      height: 60%;
+
+      svg {
+        width: 200px;
+        margin-right: 20px;
+      }
+
+      .weather-name-temp {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+
+        h2 {
+          font-size: 2rem;
+        }
+      }
+      @media (max-width: 1200px) {
+        justify-content: center;
+      }
+    }
+
+    .weather-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 40%;
+      background: $purple;
+      border-radius: 20px;
+      padding: 20px;
+      box-sizing: border-box;
+
+      h2 {
+        margin-top: 25px;
+      }
+
+      .weather-info-holder {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 50%;
+        width: 100%;
+
+        .left,
+        .right {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          width: 50%;
+
+          app-icons {
+            margin-right: 10px;
+          }
+        }
+        @media (max-width: 1200px) {
+          height: auto;
+
+          .left,
+          .right {
+            justify-content: center;
+            height: 50px;
+          }
+        }
+        @media (max-width: 700px) {
+          flex-direction: column;
+          .left,
+          .right {
+            width: 100%;
+            margin-bottom: 20px;
+          }
+        }
+      }
+
+      @media (max-width: 1200px) {
+        margin-bottom: 50px;
+
+        h2 {
+          margin-top: 0px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  .weather-app-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .weather-next-days {
+      display: flex;
+      flex-direction: row;
+      width: 80%;
+      height: 150px;
+      background: $secondary;
+      border-radius: 20px;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-bottom: 25px;
+      cursor: pointer;
+
+      @extend .shadow;
+
+      @media (max-width: 1200px) {
+        width: 100%;
+      }
+    }
+
+    .active {
+      @extend .shadow;
+      background: $purple;
+      scale: 1.05;
+    }
+
+    .small-weather-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      height: 100%;
+
+      svg {
+        height: 100%;
+      }
+      @media (max-width: 600px) {
+        width: 40%;
+      }
+    }
+
+    .small-weather-info {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      height: 100%;
+
+      .small-weather-info-date {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30%;
+        width: 100%;
+        font-size: 1rem;
+
+        @media (max-width: 600px) {
+          font-size: 0.8rem;
+        }
+      }
+
+      .small-weather-info-temperature {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70%;
+        width: 100%;
+        font-size: 1.2rem;
+      }
+      @media (max-width: 600px) {
+        width: 60%;
+      }
+    }
+  }
+  @media (max-width: 1200px) {
+    height: auto;
+    margin-bottom: 100px;
+    margin-top: 100px;
+
+    .weather-app-right {
+      height: auto;
+    }
+  }
+}

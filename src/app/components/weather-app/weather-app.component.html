@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="weather-app" *ngIf="weatherData">
+      <div class="weather-app-search">
+        <input placeholder="Warsaw" #searchInput /><button
+          (click)="getWeatherData(searchInput.value)"
+        >
+          Search!
+        </button>
+      </div>
+      <div class="weather-app-container">
+        <div class="weather-app-left">
+          <div class="weather-icon">
+            <app-icons [icon]="forecast[selectedDay].day.condition.text" [iconSmall]="false"></app-icons>
+            <div class="weather-name-temp">
+              <h1 *ngIf="weatherData">
+                {{ weatherData.location.name | uppercase }}
+              </h1>
+              <h2>
+                {{ formatTemperature(forecast[selectedDay].day.maxtemp_c) }}°C
+              </h2>
+            </div>
+          </div>
+  
+          <div class="weather-info">
+            <h2>More informations:</h2>
+            <div class="weather-info-holder">
+              <div class="left">
+                <app-icons icon="humidity"></app-icons>humidity:
+                {{ forecast[selectedDay].day.avghumidity }}%
+              </div>
+              <div class="right">
+                <app-icons icon="sunrise"></app-icons> sunrise:
+                {{ forecast[selectedDay].astro.sunrise }}
+              </div>
+            </div>
+            <div class="weather-info-holder">
+              <div class="left">
+                <app-icons icon="wind"></app-icons>wind (kph):
+                {{ forecast[selectedDay].day.avgvis_km }}
+              </div>
+              <div class="right">
+                <app-icons icon="sunset"></app-icons>sunset:
+                {{ forecast[selectedDay].astro.sunset }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="weather-app-right">
+          <div
+            class="weather-next-days"
+            *ngFor="let weather of forecast; let i = index"
+            (click)="selectDay(i)"
+            [ngClass]="{ active: i === selectedDay }"
+          >
+            <div class="small-weather-icon">
+              <app-icons [icon]="weather.day.condition.text" [iconSmall]="false"></app-icons>
+            </div>
+            <div class="small-weather-info">
+              <div class="small-weather-info-date">
+                <h1>{{ weather.date | date : "EEEE" }}</h1>
+              </div>
+              <div class="small-weather-info-temperature">
+                {{ formatTemperature(weather.day.maxtemp_c) }}°C
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
