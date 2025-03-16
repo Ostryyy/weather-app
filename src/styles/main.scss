@@ -1,0 +1,10 @@
+@use "_variables.scss" as *;
+
+body {
+  font-family: Arial, sans-serif;
+  background: $background-color;
+  color: $text-color;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
