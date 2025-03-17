@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { fetchWeather } from "../services/fetchWeather";
-import { CurrentWeather, ForecastDay } from "../models/weather.model.ts";
+import { CurrentWeather } from "../models/weather.model.ts";
 
 interface WeatherState {
   city: string;
   weatherData: {
+    city: string;
     current: CurrentWeather;
-    forecast: ForecastDay[];
   } | null;
   history: string[];
   setCity: (city: string) => void;
@@ -29,7 +29,14 @@ export const useWeatherStore = create<WeatherState>((set) => ({
           ...state.history.filter((c) => c !== city),
         ].slice(0, 5);
         localStorage.setItem("weather_history", JSON.stringify(updatedHistory));
-        return { weatherData: data, history: updatedHistory };
+
+        return {
+          weatherData: {
+            city: data.city,
+            current: data.current,
+          },
+          history: updatedHistory,
+        };
       });
     }
   },
